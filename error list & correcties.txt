@@ -1,0 +1,4 @@
+ File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 30, in draw_game
+    deal = pygame.draw.rect(screen, 'white' [150, 20, 300, 100], 0, 5 )
+
+>>  deal = pygame.draw.rect(screen, 'white', [150, 20, 300, 100], 0, 5 )
