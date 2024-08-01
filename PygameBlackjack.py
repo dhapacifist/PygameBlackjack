@@ -27,6 +27,7 @@ my_hand = []
 dealer_hand = []
 outcome = 0
 reveal_dealer = False
+hand_active = False
 
 #scoreboard
 records = [0, 0, 0]
@@ -49,7 +50,7 @@ def deal_cards(current_hand, current_deck):
 def draw_scores(player, dealer):
     screen.blit(font.render(f'Score[{player}]', True, 'white'), (350, 400))
     if reveal_dealer:
-         screen.blit(font.render(f'Score[{dealer}]', True, 'white'), (350, 100))
+        screen.blit(font.render(f'Score[{dealer}]', True, 'white'), (350, 100))
         
 #draw cards on screen
 
@@ -86,7 +87,7 @@ def draw_game(act, record):
         screen.blit(deal_text, (165, 50))
         button_list.append(deal)
         
-# once game started, shot hit and stand buttons and and win/loss records
+# once game started, hit and stand buttons and and win/loss records
   
     #copy pasted deal, changing button loc
     else:
@@ -149,6 +150,10 @@ while  run:
     if active:
         player_score = calculate_score(my_hand)
         draw_card(my_hand, dealer_hand, reveal_dealer)
+        if reveal_dealer:
+            dealer_score = calculate_score(dealer_hand)
+            if dealer_score < 17:
+                dealer_hand, game_deck = deal_cards(dealer_hand, game_deck)
         draw_scores(player_score, dealer_score)
     buttons = draw_game(active, records)
 
@@ -165,6 +170,14 @@ while  run:
                 my_hand = []
                 dealer_hand = []
                 outcome = 0
+                hand_active = True
+        else:
+            if buttons[0].collidepoint(event.pos) and player_score < 21 and hand_active:
+                my_hand, game_deck = deal_cards(my_hand, game_deck)
+            elif buttons[1].collidepoint(event.pos) and not reveal_dealer:
+                reveal_dealer = True
+                hand_active = False
+
 
     #update ipv flip, tests later
     pygame.display.update()

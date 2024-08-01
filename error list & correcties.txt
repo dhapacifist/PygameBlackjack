@@ -35,3 +35,15 @@ TypeError: 'bool' object is not iterable
 Player score printing out wrong number ( J + Q = 10. )
 
 >> Overhauled calculate_score def, better logic
+
+ File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 177, in <module>
+    elif buttons[1].collidpoint(event.pos) and not reveal_dealer:
+         ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'pygame.rect.Rect' object has no attribute 'collidpoint'. Did you mean: 'collidepoint'?
+
+>> i did mean collidepoint yes
+
+
+Hit me not working correctly
+error:   my_hand, game_deck_deck = deal_cards(my_hand, game_deck)
+	>> game_deck   
