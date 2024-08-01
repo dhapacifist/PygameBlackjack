@@ -2,3 +2,21 @@
     deal = pygame.draw.rect(screen, 'white' [150, 20, 300, 100], 0, 5 )
 
 >>  deal = pygame.draw.rect(screen, 'white', [150, 20, 300, 100], 0, 5 )
+
+  File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 85
+    my_hand, game_deck, deal_cards(my_hand; game_deck)
+
+>>  my_hand, game_deck, deal_cards(my_hand, game_deck)
+
+4 cards on initial draw
+          my_hand, game_deck, deal_cards(my_hand, game_deck)
+          dealer_hand, game_deck, deal_cards(my_hand, game_deck)
+
+>>           my_hand, game_deck, deal_cards(my_hand, game_deck)
+          dealer_hand, game_deck, deal_cards(dealer_hand, game_deck)
+
+  File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 51, in draw_cards
+    screen.blit(font.render(player[i], True, 'black'), (75, + 70*i, 460 + 5*i))
+TypeError: invalid destination position for blit
+
+>> screen.blit(font.render(player[i], True, 'black'), (75 + 70*i, 460 + 5*i))

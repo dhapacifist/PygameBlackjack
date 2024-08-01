@@ -26,14 +26,49 @@ game_deck = copy.deepcopy(decks * one_deck)
 my_hand = []
 dealer_hand = []
 outcome = 0
+reveal_dealer = False
 
 #scoreboard
 records = [0, 0, 0]
 player_ = 0 
 dealer_score = 0
 
+#functions
+
+#deal cards by selecting randomly from deck, make function for one card at a time
+
+def deal_cards(current_hand, current_deck):
+    card = random.randint (0, len(current_deck))
+    current_hand.append(current_deck[card -1])
+    current_deck.pop(card-1)
+    print(current_deck, current_hand)
+    return current_hand, current_deck
+
+#draw cards on screen
+
+def draw_cards(player, dealer, reveal):
+    for i in range(len(player)):
+        pygame.draw.rect(screen, 'white', [70 + (70 * i), 455 + (5 * i), 120, 220], 0 , 5)
+        screen.blit(font.render(player[i], True, 'black'), (75 + 70*i, 460 + 5*i))
+        screen.blit(font.render(player[i], True, 'black'), (75 + 70*i, 630 + 5*i))
+        pygame.draw.rect(screen, 'red', [70 + (70 * i), 455 + (5 * i), 120, 220], 5 , 5)
+
+
+
+    # If player hasnt finished turn, dealer will hide card
+
+    for i in range(len(dealer)):
+        pygame.draw.rect(screen, 'white', [70 + (70 * i), 155 - (5 * i), 120, 220], 0 , 5)  # minus for symmetry
+        if i != 0 or reveal:
+            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70*i, 160 - 5*i))  
+            screen.blit(font.render(dealer[i], True, 'black'), (75 + 70*i, 330 - 5*i))
+        else:
+            screen.blit(font.render('???', True, 'black'), (75 + 70*i, 160 - 5*i))
+            screen.blit(font.render('???', True, 'black'), (75 + 70*i, 330 - 5*i))
+        pygame.draw.rect(screen, 'blue', [70 + (70 * i), 155 - (5 * i), 120, 220], 5 , 5)
 
 # game condities & buttons
+
 def draw_game(act, record):
     button_list = [] 
     #on startup (not active) deal new game
@@ -63,6 +98,8 @@ def draw_game(act, record):
         screen.blit(score_text, (15, 840))
     return button_list
 
+def calculate_score(hand):
+    #calculates hand score fresh every time, check how many aces we have
 
 #main game loop: keeps looping while game is running
 
@@ -71,6 +108,23 @@ while  run:
     # game at framerate & bg col
     timer.tick(fps)
     screen.fill('green')
+
+    #inial deal to player and dealer
+    if initial_deal:
+        for i in range(2):
+          my_hand, game_deck, deal_cards(my_hand, game_deck)
+          dealer_hand, game_deck, deal_cards(dealer_hand, game_deck)
+          initial_deal = False
+          print (my_hand, dealer_hand)
+
+
+
+
+
+    # once game is activated, and dealt, calculate score and display cards
+    if active:
+        player_score = calculate_score(my_hand)
+        draw_cards(my_hand, dealer_hand, reveal_dealer)
     buttons = draw_game(active, records)
 
     #events during game loop
