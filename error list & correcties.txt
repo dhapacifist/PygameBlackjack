@@ -6,10 +6,17 @@ Terminal output bij tests: error + correctie
 
 >>  deal = pygame.draw.rect(screen, 'white', [150, 20, 300, 100], 0, 5 )
 
-  File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 85
+  
+
+
+File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 85
     my_hand, game_deck, deal_cards(my_hand; game_deck)
 
 >>  my_hand, game_deck, deal_cards(my_hand, game_deck)
+
+
+
+
 
 4 cards on initial draw
           my_hand, game_deck, deal_cards(my_hand, game_deck)
@@ -18,18 +25,27 @@ Terminal output bij tests: error + correctie
 >>           my_hand, game_deck, deal_cards(my_hand, game_deck)
           dealer_hand, game_deck, deal_cards(dealer_hand, game_deck)
 
-  File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 51, in draw_cards
+  
+
+
+File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 51, in draw_cards
     screen.blit(font.render(player[i], True, 'black'), (75, + 70*i, 460 + 5*i))
 TypeError: invalid destination position for blit
 
 >> screen.blit(font.render(player[i], True, 'black'), (75 + 70*i, 460 + 5*i))
 
-  File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 115, in calculate_score
+  
+
+
+File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 115, in calculate_score
     for j in range in range(8):
 TypeError: 'bool' object is not iterable
 
 
 >>    for j in range(8):
+
+
+
 
 
 Player score printing out wrong number ( J + Q = 10. )
@@ -39,9 +55,14 @@ Player score printing out wrong number ( J + Q = 10. )
  File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 177, in <module>
     elif buttons[1].collidpoint(event.pos) and not reveal_dealer:
          ^^^^^^^^^^^^^^^^^^^^^^
+
+
+
 AttributeError: 'pygame.rect.Rect' object has no attribute 'collidpoint'. Did you mean: 'collidepoint'?
 
 >> i did mean collidepoint yes
+
+
 
 
 Hit me not working correctly
@@ -51,6 +72,9 @@ error:   my_hand, game_deck_deck = deal_cards(my_hand, game_deck)
  File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 108, in draw_game
     if result != 0:
        ^^^^^^
+
+
+
 NameError: name 'result' is not defined. Did you mean: 'results'?  
    def draw_game(act, record, ):
 >> def draw_game(act, record, result):
@@ -61,6 +85,9 @@ PS C:\Users\Admin\Desktop\Pygame project
 	 outcome, records, add_score = check_endgame(hand_active, dealer_score, player_score, outcome, records, add_score)
 	player_ = 0
 	>> player_score = 0
+
+
+
 
 Drawing multiple cards on hit me again
 same error.. game_deck_deck >> game_deck

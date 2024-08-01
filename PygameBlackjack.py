@@ -3,9 +3,16 @@ import copy
 import random
 import pygame
 
-pygame.init()
 
+
+pygame.init()
+pygame.mixer.init()
 #variables blackjack
+
+
+pygame.mixer.music.load('background_music.mp3')  
+pygame.mixer.music.set_volume(0.2) 
+pygame.mixer.music.play(-1)
 
 cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 one_deck = 4 * cards
@@ -30,7 +37,7 @@ results = ['', 'YOU DIED', 'A WINNER IS YOU', 'HOUSE WINS', 'TIE']
 records = [0, 0, 0]
 player_score = 0 
 dealer_score = 0
-
+green = (0, 70, 20)
 #functions
 
 #deal cards by selecting randomly from deck, make function for one card at a time
@@ -58,8 +65,6 @@ def draw_card(player, dealer, reveal):
         screen.blit(font.render(player[i], True, 'black'), (75 + 70*i, 630 + 5*i))
         pygame.draw.rect(screen, 'red', [70 + (70 * i), 455 + (5 * i), 120, 220], 5 , 5)
 
-
-
     # If player hasnt finished turn, dealer will hide card
 
     for i in range(len(dealer)):
@@ -72,9 +77,7 @@ def draw_card(player, dealer, reveal):
             screen.blit(font.render('???', True, 'black'), (75 + 70*i, 330 - 5*i))
         pygame.draw.rect(screen, 'blue', [70 + (70 * i), 155 - (5 * i), 120, 220], 5 , 5)
 
-
 #check endgame conditions function
-
 
 def check_endgame(hand_act, deal_score, play_score, result, totals, add):
     #check endgame scenarios is player stood, bosted or blackjack
@@ -132,7 +135,6 @@ def draw_game(act, record, result):
         button_list.append(deal)
     return button_list
 
-
 #pass in player or dealer hand and get best score possible
 def calculate_score(hand):
     # Calculate hand score fresh every time, checking how many aces we have
@@ -163,7 +165,7 @@ run = True
 while  run:
     # game at framerate & bg col
     timer.tick(fps)
-    screen.fill('green')
+    screen.fill(green)
 
     #inial deal to player and dealer
     if initial_deal:
