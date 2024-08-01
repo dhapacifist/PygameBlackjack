@@ -21,7 +21,7 @@ timer = pygame.time.Clock()
 font = pygame.font.Font('freesansbold.ttf', 44)
 smallfont = pygame.font.Font('freesansbold.ttf', 36)
 active = False
-initial_deal = True     #aparte variable voor 1e deal, 2 kaarten
+initial_deal = True  #aparte variable voor 1e deal, 2 kaarten
 game_deck = copy.deepcopy(decks * one_deck)
 my_hand = []
 dealer_hand = []
@@ -44,9 +44,16 @@ def deal_cards(current_hand, current_deck):
     print(current_deck, current_hand)
     return current_hand, current_deck
 
+# draw scores for player and dealer screen
+
+def draw_scores(player, dealer):
+    screen.blit(font.render(f'Score[{player}]', True, 'white'), (350, 400))
+    if reveal_dealer:
+         screen.blit(font.render(f'Score[{dealer}]', True, 'white'), (350, 100))
+        
 #draw cards on screen
 
-def draw_cards(player, dealer, reveal):
+def draw_card(player, dealer, reveal):
     for i in range(len(player)):
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 455 + (5 * i), 120, 220], 0 , 5)
         screen.blit(font.render(player[i], True, 'black'), (75 + 70*i, 460 + 5*i))
@@ -98,9 +105,30 @@ def draw_game(act, record):
         screen.blit(score_text, (15, 840))
     return button_list
 
+#pass in player or dealer hand and get best score possible
 def calculate_score(hand):
-    #calculates hand score fresh every time, check how many aces we have
+    # Calculate hand score fresh every time, checking how many aces we have
+    hand_score = 0
+    aces_count = hand.count('A')
+    
+    for card in hand:
+        # For 2,3,4,5,6,7,8,9 - add the number to total
+        if card in cards[:9]:  # checking 2 to 9
+            hand_score += int(card)
+        # For 10 and face cards
+        elif card in ['10', 'J', 'Q', 'K']:
+            hand_score += 10
+        # For Aces, start by adding 11
+        elif card == 'A':
+            hand_score += 11
 
+    # Determine how many aces needed to be 1 to be under 21
+    while hand_score > 21 and aces_count > 0:
+        hand_score -= 10  # Convert one Ace from 11 to 1
+        aces_count -= 1
+
+    return hand_score
+                
 #main game loop: keeps looping while game is running
 
 run = True
@@ -117,14 +145,11 @@ while  run:
           initial_deal = False
           print (my_hand, dealer_hand)
 
-
-
-
-
     # once game is activated, and dealt, calculate score and display cards
     if active:
         player_score = calculate_score(my_hand)
-        draw_cards(my_hand, dealer_hand, reveal_dealer)
+        draw_card(my_hand, dealer_hand, reveal_dealer)
+        draw_scores(player_score, dealer_score)
     buttons = draw_game(active, records)
 
     #events during game loop

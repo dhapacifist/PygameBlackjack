@@ -1,3 +1,6 @@
+Terminal output bij tests: error + correctie
+
+
  File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 30, in draw_game
     deal = pygame.draw.rect(screen, 'white' [150, 20, 300, 100], 0, 5 )
 
@@ -20,3 +23,15 @@
 TypeError: invalid destination position for blit
 
 >> screen.blit(font.render(player[i], True, 'black'), (75 + 70*i, 460 + 5*i))
+
+  File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 115, in calculate_score
+    for j in range in range(8):
+TypeError: 'bool' object is not iterable
+
+
+>>    for j in range(8):
+
+
+Player score printing out wrong number ( J + Q = 10. )
+
+>> Overhauled calculate_score def, better logic
