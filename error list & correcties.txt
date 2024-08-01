@@ -46,4 +46,28 @@ AttributeError: 'pygame.rect.Rect' object has no attribute 'collidpoint'. Did yo
 
 Hit me not working correctly
 error:   my_hand, game_deck_deck = deal_cards(my_hand, game_deck)
-	>> game_deck   
+	>> game_deck
+
+ File "c:\Users\Admin\Desktop\Pygame project\PygameBlackjack\PygameBlackjack.py", line 108, in draw_game
+    if result != 0:
+       ^^^^^^
+NameError: name 'result' is not defined. Did you mean: 'results'?  
+   def draw_game(act, record, ):
+>> def draw_game(act, record, result):
+
+
+NameError: name 'player_score' is not defined. Did you mean: 'dealer_score'?
+PS C:\Users\Admin\Desktop\Pygame project
+	 outcome, records, add_score = check_endgame(hand_active, dealer_score, player_score, outcome, records, add_score)
+	player_ = 0
+	>> player_score = 0
+
+Drawing multiple cards on hit me again
+same error.. game_deck_deck >> game_deck
+
+			    >> all of event check nested wrong, fixing next fixed issue
+
+
+
+
+
