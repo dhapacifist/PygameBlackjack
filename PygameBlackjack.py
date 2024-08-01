@@ -27,7 +27,7 @@ def draw_game(act):
     button_list = [] 
     #on startup (not active) deal new game
     if not act:
-        deal = pygame.rect.Rect
+        deal = pygame.draw.Rect
 
 
 
